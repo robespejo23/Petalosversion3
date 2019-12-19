@@ -1,0 +1,51 @@
+{% extends "core/Base.html" %}
+
+{% block titulo %}
+    Carrito de Compras - Floreria Petalos
+{% endblock titulo %}
+
+{% load static %}
+
+{% block contenido %}
+
+<!-- sector del menu -->
+<h2>Carrito de Compras</h2>
+<center>
+<div class="container">
+    <table border="1">
+        <tr>
+            <td>Imagen</td>
+            <td>Nombre</td>
+            <td>Descripcion</td>
+            <td>Valor</td>
+            <td>Estado</td>
+            <td>Total</td>
+
+        </tr>
+        {% for f in x %}
+        <tr>
+            <td>{{f.Imagen}}</td>
+            <td>{{f.nombre}}</td>
+            <td>{{f.descripcion}}</td>
+            <td>{{f.valor}}</td>
+            <td>{{f.estado}}</td>
+            <td>{{f.total}}</td>
+
+            <td>
+                <input type="button" value="+" onclick="javascript:location.href='{% url 'CARRO_MAS' f.nombre %}'" >
+                <input type="button" value="-" onclick="javascript:location.href='{% url 'CARRO_MENOS' f.nombre %}'" >
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3">Total</td>  
+            <td>{{total}}</td>  
+            <td>
+                <input type="button" value="Guardar Carro" onclick="javascript:location.href='{% url 'GRABAR_CARRO' %}'" >
+            </td>
+        </tr>
+    </table>
+</div>
+{{mensaje}}
+</center>
+{% endblock contenido %}

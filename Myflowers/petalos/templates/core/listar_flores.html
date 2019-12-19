@@ -1,0 +1,34 @@
+{% extends "core/Base.html" %}
+
+{%  block contenido %}
+    
+    <table>
+        <tr>
+        
+            <th> Nombre </th>
+
+            <th> Descripcion </th>
+
+            <th> Valor </th>
+
+            <th> Stock </th>
+
+        </tr>
+
+        {% for f in flores %}
+            <tr>
+
+                <td>{{f.name}}</td>
+                            
+                <td>{{f.descripcion}}</td>
+                            
+                <td>{{f.valor}}</td>
+                            
+                <td>{{f.stock}}</td>
+            </tr>
+        {% endfor %}
+                       
+    </table>
+
+
+{% endblock contenido %}%}

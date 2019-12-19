@@ -1,0 +1,90 @@
+{% extends "core/Base.html" %}
+
+{%  block contenido %}
+    
+    <form action="" method="POST" >
+       {% csrf_token %}
+        
+        <table>
+            <h1>Modificar Flor</h1>
+            <tr>
+                <td>Fotografia:</td>
+                <td>
+                    <input type="file" name="txtImagen">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Nombre:</td>
+
+                <td>
+                    <input type="text" name="txtNombre">
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>Valor:</td>
+
+                <td>
+                     <input type="number" name="txtValor">
+                    </td>
+
+            </tr>
+
+            <tr>
+                <td>Descripcion:</td>
+
+                <td>
+                    <textarea name="txtDescripcion"></textarea>
+                    </td>
+
+            </tr>
+
+            <tr>
+                <td>Estado:</td>
+        
+                <td>
+                    <select name="cboEstado">
+                        {% for es in lista %}
+                            <option>{{es.name}}</option>
+                        {% endfor %}
+                    </select>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>Stock:</td>
+
+                <td>
+                    <input type="number" name="txtStock">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="reset" value="Limpiar">
+                    <input type="submit" value="Modificar">
+                </td>
+            </tr>
+
+        
+                   
+        </table>
+           
+            {% if sw %}
+                <script>
+                    setTimeout(function(){
+                    document.getElementById("mensaje").innerHTML=''
+                    },2000)
+                </script>   
+                <div id="mensaje"> </div>
+        
+            {% endif %}
+
+        
+
+    </form>
+
+
+{% endblock contenido %}

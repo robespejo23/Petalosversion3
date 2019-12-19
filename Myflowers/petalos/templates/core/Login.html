@@ -1,0 +1,27 @@
+{% extends "core/Base.html" %}
+
+ {% block titulo %}
+      Login de Acceso   
+{% endblock titulo %}
+
+{% block contenido %}
+
+    <h1>Fomulario Login de Acceso</h1>
+        <form name="Formulario" method="POST" action="{% url 'LOGIN_INICIAR' %}">
+            {% csrf_token %}
+            <table border="1">
+                <tr>
+                    <td> Usuario:</td>
+
+                    <td> <input type="txt" name="txtUsuario"> </td>
+            
+                </tr>
+                <tr>
+                    <td> Contraseña:</td>
+                        <td> <input type="password" name="txtContra"></td>
+                    <td colspan="2"> <input type="submit" value="Enviar"> </td>
+                </tr>    
+            </table>
+        </form>
+    <a href="{% url 'social:begin' 'facebook' %}"> Iniciar Sesion con Facebook</a>
+{% endblock contenido %}        

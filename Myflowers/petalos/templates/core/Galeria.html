@@ -1,0 +1,110 @@
+{% extends "core/Base.html" %}
+
+{{% block titulo %}
+        Main - Floreria Petalos
+{% endblock titulo %}
+{% load static   %}
+
+
+{% block contenido %}
+<title>Galeria Petalos - Floreria Petalos</title>
+
+    <h2> Flores</h2>
+
+        <div class="Flores">
+            <h3> Rosas </h3>
+            <img src="{% static 'core/img/ramo-rosas-rojas.jpg' %}">
+            <p>Los rosales son arbustos o trepadoras (a veces colgantes), generalmente espinosos, que alcanzan 
+            de dos a cinco metros de altura, en ocasiones, pueden llegar a los 20 m trepando sobre otras plantas. 
+            Tienen tallos semileñosos, casi siempre erectos (a veces rastreros), algunos de textura rugosa 
+            y escamosa.
+            </p>
+            <div> Ver Flor  </div>
+        </div>
+        <div class="Flores">
+            <h3> Ramos </h3>
+            <img src="{% static 'core/img/flores.jpg' %}">
+            <p>Los ramos de flores son un conjunto de flores, hierbas y ramas, que pueden ser naturales o 
+            artificiales. ​ Si el ramo es de pequeño tamaño se le denomina ramillete. ​ También existe el 
+            bouquet (o buque), que es un pequeño ramo de flores elaborado con sentido de arte floral.
+
+            </p>
+            <div> Ver Flor  </div>
+        </div>  
+        <div class="Flores">
+            <h3> Tulipanes </h3>
+            <img src="{% static 'core/img/tulipanes.jpg' %}">
+            <p>Los tulipanes son plantas bulbosas (almacenan nutrientes en estructuras subterráneas) 
+            que suelen tener un tallo simple que puede medir hasta sesenta centímetros. Sus hojas, 
+            lanceoladas, son grandes. En la parte superior del escapo aparece la flor, también de dimensiones 
+            importantes, que se caracteriza por sus colores.
+
+            </p>
+            <div> Ver Flor  </div>
+        </div>
+        <div class="Flores">
+            <h3> Lirio </h3>
+            <img src="{% static 'core/img/lirio.jpg' %}">
+            <p>Los lirios se encuentran en el grupo de las plantas perennes y pueden alcanzar facilmente 
+            un metro de alto. Sus tallos frondosos forman bulbos subterráneos que permiten a la flor 
+            guardar nutrientes y sobrevivir el invierno sin problemas, por eso se conocen como flores 
+            altamente resistentes. 
+            </p>
+            <div> Ver Flor </div>
+        </div> 
+        <div class="Flores">
+            <h3> Orquidea </h3>
+            <img src="{% static 'core/img/orquideas.jpg' %}">
+            <p>Las orquideas u orquidáceas (nombre científico Orchidaceae) son una familia de plantas 
+            monocotiledoneas que se distinguen por la complejidad de sus flores y por sus interacciones 
+            ecologicas con los agentes polinizadores y con los hongos con los que forman micorrizas.
+    
+            </p>
+            <div> Ver Flor </div>
+        </div>
+        <div class="Flores">
+            <h3> Maravilla</h3>
+            <img src="{% static 'core/img/maravilla.jpg' %}">
+            <p>El girasol, es una flor hermosa, cuyo nombre científico es Helianthus annus. Tambien se lo 
+            conoce como maravilla, mirasol, maíz de teja, calom, tlapololote, jaquima, acahual, etcetera. 
+            Es nativo de America y se mueve en dirección al sol para abrazar sus rayos.
+            </p>
+            <div> Ver Flor </div>
+        </div>  
+        <div class="Flores">
+            <h3> Claveles </h3>
+            <img src="{% static 'core/img/claveles.jpg' %}">
+            <p>El clavel o clavelina​ (Dianthus caryophyllus) es una planta herbacea perteneciente a la 
+            familia de las Caryophyllaceae, difundida en las regiones mediterraneas.​ Es espontanea en la 
+            flora de la peninsula iberica. En su forma típica es una planta cespitosa,​ con numerosos vastagos 
+            de hasta 1 m de altura.
+            </p>
+            <div> Ver Flor </div>
+        </div>  
+        <div class="Flores">
+            <h3> Jazmin </h3>
+            <img src="{% static 'core/img/jazmin.jpg' %}">
+            <p>Planta trepadora con flores que consituye el genero Jasminum, es uno de los mayores de la 
+            familia de las Oleaceas (Oleaceae), y abarca unas 350 especies perennes y caducas.
+            </p>
+            <div> Ver Flor </div>
+        </div>
+        
+        {% for f in listaflor %} 
+            <div class="Flores">
+                <h3> {{f.name}}</h3>
+                <img src="{{ f.Imagen.url }}">
+                <p>{{f.descripcion}}</p>
+            <div> Ver Flor </div>
+            <div>
+                <a href="{% url 'ELIMINAR' f.name %}">Eliminar</a>
+            </div>
+            <div>
+               <a href="{% url 'A_CARRO' f.name %}"> Agregar a carrito </a>
+            </div>
+    
+        {% endfor%}
+
+    <h1>{{msg}}</h1>  
+
+{% endblock contenido %}

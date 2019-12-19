@@ -1,0 +1,146 @@
+<<!DOCTYPE html>
+<html lang="en">
+{% load static  %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{%  static 'core/css/estilo_flores.css' %}" type="text/css" rel="stylesheet">
+    <title>
+    {% block titulo %}
+
+    {% endblock titulo %}
+    </title>
+
+    {% load pwa %}
+    {% progressive_web_app_meta %}
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js"></script>
+
+
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAKVGabWOKFBXbM7vxTtlLpbp9StsJlvIg",
+            authDomain: "flore-5b7ed.firebaseapp.com",
+            databaseURL: "https://flore-5b7ed.firebaseio.com",
+            projectId: "flore-5b7ed",
+            storageBucket: "flore-5b7ed.appspot.com",
+            messagingSenderId: "64904305891",
+            appId: "1:64904305891:web:f8ebfb6fd45ed714b579d6",
+            measurementId: "G-M92Z6EGCX3"
+       };
+       // Initialize Firebase
+       firebase.initializeApp(firebaseConfig);
+ 
+     left messaging = firebase.messaging();
+
+     navigator.serviceworker
+     .register('./serviceworker.js')
+     .then(function(register){
+
+      messaging.useserviceworker(register);
+
+      messaging.requestPermission()
+      .then(function(){
+          console.log("el usuario he aceptado recibir notificaciones")
+
+          return messaging.getTaken();
+      })
+      .then(function(token){
+          console.log(token);
+
+          fetch('guardar-token/', {
+              method:'post',
+              headers:{
+                  'Content-Type':'application/json',
+                  'Accept':'application/json'
+              },
+              body:JSON.stringfy({
+                  'token':token
+              })
+          })
+          .then(function(resultado){
+              console.log("se ha guardado el token")
+          })
+          .catch(function(e){
+              console.log("no se ha guardado el token")
+          })
+      })
+      .catch(function(e){
+          console.log("el usuario no ha aceptado")
+      })
+
+    })
+        
+messaging.onMessage(function(payload){
+    console.log("ha llegado notificacion")
+
+    let date= payload;
+    console.log(data);
+     let title = payload.notificacion.title;
+
+     let options = {
+        body:payload.notificacion.body,
+        icon:payload.notificacion.icon,
+
+
+
+     }
+
+      let mensaje = new notificacion(title, options);
+     });
+
+    </script>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="{% static 'core/img/carrito.png' %}">
+            <ol>
+                <li>
+                    <a href="{% url 'HOME' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'GALERI' %}">Galeria</a>
+                </li>
+                <li>
+                    <a href="{% url 'FORMU' %}">Formulario</a>
+                </li>
+                 <li>
+                    <a href="{% url 'FORMULA' %}">Formulario2</a>
+                  
+                </li>
+                <li>
+                    <a href="{% url 'listar_flores' %}">listar_flores</a>
+                </li>
+                <li>
+                    <a href="{% url 'Modificar' %}"> Modificar</a>
+                </li>
+                <li>
+                    <a href="{% url 'CARRO' %}">carro</a>
+                </li>
+                 <li>
+                    <a href="{% url 'CERRAR' %}">Logout</a>
+                </li>
+                <li>
+                    <b> Bienvenido {{user.username}}</b>
+                </li>
+            </ol>
+        </nav>    
+    </header>
+    <section>
+        {% block contenido %}
+
+        {% endblock contenido %}
+    </section>    
+</body>
+</html>

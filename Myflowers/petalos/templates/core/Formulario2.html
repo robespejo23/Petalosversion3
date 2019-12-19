@@ -1,0 +1,132 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{% static 'core/css/estilo_flores.css' %}" type="text/css" rel="stylesheet">
+    <title>Formulario</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- comentario OL (lista ordenada) UL (lista sin orden) LI (indice de lista) -->            
+            <img src="{% static 'core/img/carrito.png' %}">
+           <ol>
+                <li>
+
+                    <a href="{% url 'HOME' %}">Home</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'GALERI' %}">Galeria</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'FORMU' %}">Formulario</a>
+                </li>
+                
+                 <li>
+                    <a href="{% url 'FORMULA' %}">Formulario2</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'CARRO' %}">carro</a>
+                </li>
+
+                 <li>
+                    <a href="{% url 'CERRAR' %}">Logout</a>
+                </li>   
+
+            </ol>
+        </nav>
+    </header>
+    <section>
+        <div>
+            <form id="Formulario" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <center>
+                    <h1>Formulario de Registro de Flores</h1>
+                    <table>
+                        <tr>
+                            <td>Fotografia:</td>
+                            <td>
+                                <input type="file" name="txtImagen">
+                            </td>
+                            </tr>
+
+                        <tr>
+                            <td>Nombre:</td>
+
+                            <td>
+                                <input type="text" name="txtNombre">
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Valor:</td>
+
+                            <td>
+                                <input type="number" name="txtValor">
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Descripcion:</td>
+
+                            <td>
+                                <textarea name="txtDescripcion"></textarea>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Estado:</td>
+        
+                            <td>
+                                <select name="cboEstado">
+                                    {% for es in lista %}
+                                        <option>{{es.name}}</option>
+                                    {% endfor %}
+                                </select>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Stock:</td>
+
+                            <td>
+                                <input type="number" name="txtStock">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" value="Guardar">
+                                <input type="submit" value="Eliminar">
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </center>
+
+            </form>
+            {% if sw %}
+                <script>
+                    setTimeout(function(){
+                    document.getElementById("mensaje").innerHTML=''
+                    },2000)
+                </script>   
+                <div id="mensaje"> </div>
+        
+            {% endif %}
+        </div>
+        
+    </section>
+</body>
+</html>
